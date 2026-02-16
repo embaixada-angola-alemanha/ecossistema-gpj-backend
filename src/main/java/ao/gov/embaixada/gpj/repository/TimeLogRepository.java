@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Repository
@@ -19,4 +20,7 @@ public interface TimeLogRepository extends JpaRepository<TimeLog, UUID> {
 
     @Query("SELECT COALESCE(SUM(tl.hours), 0) FROM TimeLog tl")
     double sumAllHours();
+
+    @Query("SELECT COALESCE(SUM(tl.hours), 0) FROM TimeLog tl WHERE tl.task.sprint.id = :sprintId AND tl.logDate <= :date")
+    double sumHoursBySprintIdAndDateBefore(UUID sprintId, LocalDate date);
 }

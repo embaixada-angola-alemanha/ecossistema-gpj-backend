@@ -24,9 +24,22 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
 
     long countByStatus(TaskStatus status);
 
+    long countBySprintId(UUID sprintId);
+
+    long countBySprintIdAndStatus(UUID sprintId, TaskStatus status);
+
     @Query("SELECT COALESCE(SUM(t.estimatedHours), 0) FROM Task t WHERE t.sprint.id = :sprintId")
     double sumEstimatedHoursBySprintId(@Param("sprintId") UUID sprintId);
 
     @Query("SELECT COALESCE(SUM(t.consumedHours), 0) FROM Task t WHERE t.sprint.id = :sprintId")
     double sumConsumedHoursBySprintId(@Param("sprintId") UUID sprintId);
+
+    @Query("SELECT COALESCE(SUM(t.estimatedHours), 0) FROM Task t WHERE t.sprint.id = :sprintId AND t.status = 'DONE'")
+    double sumEstimatedHoursOfCompletedBySprintId(@Param("sprintId") UUID sprintId);
+
+    @Query("SELECT COALESCE(SUM(t.estimatedHours), 0) FROM Task t")
+    double sumAllEstimatedHours();
+
+    @Query("SELECT COALESCE(SUM(t.consumedHours), 0) FROM Task t")
+    double sumAllConsumedHours();
 }
