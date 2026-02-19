@@ -15,8 +15,8 @@ public class OpenApiConfig {
     public OpenAPI gpjOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("GPJ — Gestão de Projectos API")
-                        .description("API REST para gestão de sprints, tarefas e time tracking")
+                        .title("GOP — Gestão de Operações API")
+                        .description("API REST para monitoramento de operações do ecossistema digital")
                         .version("0.1.0")
                         .contact(new Contact()
                                 .name("Ecossistema Digital")

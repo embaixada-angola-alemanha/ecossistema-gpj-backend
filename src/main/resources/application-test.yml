@@ -21,3 +21,7 @@ spring:
 ecossistema:
   security:
     enabled: false
+
+gop:
+  health-poller:
+    enabled: false

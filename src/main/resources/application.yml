@@ -41,6 +41,16 @@ ecossistema:
       - /swagger-ui/**
       - /swagger-ui.html
 
+gop:
+  health-poller:
+    enabled: true
+    interval-ms: 30000
+    timeout-ms: 5000
+    failure-threshold: 3
+  prometheus:
+    url: http://localhost:9090
+  health-log-retention-days: 90
+
 springdoc:
   api-docs:
     path: /v3/api-docs

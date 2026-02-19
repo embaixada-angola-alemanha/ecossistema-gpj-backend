@@ -28,18 +28,6 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(ex.getMessage()));
     }
 
-    @ExceptionHandler(CircularDependencyException.class)
-    public ResponseEntity<ApiResponse<Void>> handleCircularDependency(CircularDependencyException ex) {
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body(ApiResponse.error(ex.getMessage()));
-    }
-
-    @ExceptionHandler(CapacityExceededException.class)
-    public ResponseEntity<ApiResponse<Void>> handleCapacityExceeded(CapacityExceededException ex) {
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body(ApiResponse.error(ex.getMessage()));
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValidation(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getFieldErrors().stream()
