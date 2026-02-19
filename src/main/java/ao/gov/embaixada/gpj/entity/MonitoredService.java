@@ -4,6 +4,8 @@ import ao.gov.embaixada.commons.dto.BaseEntity;
 import ao.gov.embaixada.gpj.enums.ServiceStatus;
 import ao.gov.embaixada.gpj.enums.ServiceType;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class MonitoredService extends BaseEntity {
     @Column(name = "consecutive_failures")
     private int consecutiveFailures = 0;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "metadata", columnDefinition = "jsonb")
     private String metadata;
 

@@ -2,6 +2,8 @@ package ao.gov.embaixada.gpj.entity;
 
 import ao.gov.embaixada.commons.dto.BaseEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -25,6 +27,7 @@ public class SystemEvent extends BaseEntity {
     @Column(name = "entity_id")
     private String entityId;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "payload", columnDefinition = "jsonb")
     private String payload;
 
