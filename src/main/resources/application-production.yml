@@ -1,0 +1,71 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: gpj-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/gpj_db}
+    username: ${SPRING_DATASOURCE_USERNAME:ecossistema}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+  rabbitmq:
+    host: ${RABBITMQ_HOST:rabbitmq}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:ecossistema}
+    password: ${RABBITMQ_PASSWORD}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://auth.embaixada-angola.site/realms/ecossistema
+
+ecossistema:
+  security:
+    enabled: true
+    issuer-uri: https://auth.embaixada-angola.site/realms/ecossistema
+    public-paths:
+      - /actuator/health
+    cors:
+      allowed-origins:
+        - https://gpj.embaixada-angola.site
+      allowed-methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+        - OPTIONS
+      allowed-headers:
+        - Authorization
+        - Content-Type
+        - Accept
+        - X-Requested-With
+      allow-credentials: true
+      max-age: 3600
+    rate-limit:
+      enabled: true
+      requests-per-minute: 100
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+logging:
+  level:
+    ao.gov.embaixada: WARN
+    org.springframework.security: WARN
